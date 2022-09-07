@@ -3,22 +3,24 @@ namespace Encapsulation.Models
 {
     public class WeatherReporter
     {
-        public string Location;
-        public double Temperature;
+        public string Location { get; private set; }
+        public double TemperatureInCelcius { get; private set; }
 
-        public WeatherReporter(string location, double temperature)
+        public WeatherReporter(string location, double temperatureInCelcius)
         {
             Location = location;
-            Temperature = temperature;
+            TemperatureInCelcius = temperatureInCelcius;
         }
 
-        public string Print()
+        public string Print_Location_and_weather()
         {
-            double newTemp = (9.0 / 5.0) * Temperature + 32;
-            return $"I am in {Location} and it is {Check1()}. {Check2()}. The temperature in Fahrenheit is {newTemp}.";
+            const double farenheitMultiplier = 1.8;
+            const int farenheitadditon = 32;
+            double fahrenheit = farenheitMultiplier * TemperatureInCelcius + farenheitadditon;
+            return $"I am in {Location} and it is {Check_Location_Symbol()}. {Check_TemperatureInCelcius()}. The temperature in Fahrenheit is {fahrenheit}.";
         }
 
-        public string Check1()
+        public string Check_Location_Symbol()
         {
             if (Location == "London")
             {
@@ -36,20 +38,24 @@ namespace Encapsulation.Models
             {
 
                 return "🌤";
-
             }
-            return "🔆";
+
+            else
+                return "🔆";
         }
 
-        public string Check2()
+        public string Check_TemperatureInCelcius()
         {
-            if (Temperature > 30)
+            const int tempUpperLimit = 30;
+            const int templowerLimit = 10;
+
+            if (TemperatureInCelcius > tempUpperLimit)
             {
 
                 return "It's too hot 🥵!";
 
             }
-            else if (Temperature < 10)
+            else if (TemperatureInCelcius < templowerLimit)
             {
 
                 return "It's too cold 🥶!";
